@@ -56,7 +56,7 @@ public extension HTTPEndpoint {
             request = try HTTPHeaderEncoder.encode(request: request, with: [
                 "Accept": contentType.rawValue,
                 "Content-Type": contentType.rawValue,
-                "User-Agent": OONetworking.appName + String(OONetworking.version)
+                "User-Agent": Networking.appName + String(Networking.version)
             ])
         }
 

@@ -109,7 +109,7 @@ public struct HTTPJSONClient<Endpoint: HTTPEndpoint>: HTTPNetworkingClient {
 
             // Attempt to parse the response data as API error in case it is not in 200...299 range, but only if it is from instagram!
             if let urlString = request.url?.absoluteString,
-               OONetworking.feedbackPaths.contains(where: urlString.contains) {
+               Networking.feedbackPaths.contains(where: urlString.contains) {
                 if let parsedError: APIError = try? self.decodeJSON(data: data),
                    parsedError.status != "ok" { // "ok"
                     completion(.failure(.errorObject(parsedError, rawData: data, statusCode: response.statusCode)))

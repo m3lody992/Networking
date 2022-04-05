@@ -1,8 +1,8 @@
 
 
-public struct OONetworking {
+public struct Networking {
 
-    internal static var shared = OONetworking()
+    internal static var shared = Networking()
 
     internal var feedbackPaths: [String]!
     internal static var feedbackPaths: [String] {
