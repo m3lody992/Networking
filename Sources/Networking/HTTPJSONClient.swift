@@ -64,6 +64,8 @@ public struct HTTPJSONClient<Endpoint: HTTPEndpoint>: HTTPNetworkingClient {
 		do {
 			// Prepare the URL request.
 			let request = try prepare(endpoint: endpoint)
+            
+            print(try? JSONSerialization.jsonObject(with: data, options: .allowFragments))
 
 			// Return the request.
 			return send(request: request) { result in
