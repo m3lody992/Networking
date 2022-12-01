@@ -64,8 +64,6 @@ public struct HTTPJSONClient<Endpoint: HTTPEndpoint>: HTTPNetworkingClient {
 		do {
 			// Prepare the URL request.
 			let request = try prepare(endpoint: endpoint)
-            
-            print(try? JSONSerialization.jsonObject(with: data, options: .allowFragments))
 
 			// Return the request.
 			return send(request: request) { result in
@@ -102,6 +100,8 @@ public struct HTTPJSONClient<Endpoint: HTTPEndpoint>: HTTPNetworkingClient {
 				completion(.failure(.emptyResponse))
 				return
 			}
+            
+            print(try? JSONSerialization.jsonObject(with: data, options: .allowFragments))
 
 			guard let response = response as? HTTPURLResponse
 			else {
