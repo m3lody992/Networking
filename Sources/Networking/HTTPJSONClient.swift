@@ -115,6 +115,10 @@ public struct HTTPJSONClient<Endpoint: HTTPEndpoint>: HTTPNetworkingClient {
                     completion(.failure(.errorObject(parsedError, rawData: data, statusCode: response.statusCode)))
                     return
                 }
+            } else if let urlString = response.url?.absoluteString,
+                      urlString == "https://www.instagram.com/" || (300...399).contains(response.statusCode) {
+                completion(.failure(.sessionError(rawData: data, statusCode: response.statusCode)))
+                return
             }
 
 			switch response.statusCode {

@@ -21,6 +21,7 @@ public enum NetworkingError: Error {
 	case unknown(Error?)
 	case realtimeRequest(code: Int, message: String)
     case errorObject(APIError, rawData: Data, statusCode: Int)
+    case sessionError(rawData: Data, statusCode: Int)
 
     public var debugDescription: String {
         switch self {
@@ -34,6 +35,7 @@ public enum NetworkingError: Error {
         case .unknown: return "unknown" // "unknown"
         case .realtimeRequest: return "realtime_request_error" // "realtime_request_error"
         case .errorObject(let error, _, let statusCode): return "error_" + "\(statusCode)_\(error.status)_\(error.message ?? "unknown")"
+        case .sessionError(_, let statusCode): return "session_error_\(statusCode)"
         }
     }
 
