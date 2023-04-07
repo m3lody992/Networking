@@ -119,6 +119,7 @@ public struct HTTPJSONClient<Endpoint: HTTPEndpoint>: HTTPNetworkingClient {
                       urlString == "https://www.instagram.com/" || (300...399).contains(response.statusCode) {
                 completion(.failure(.errorObject(.init(
                     status: "session_error",
+                    requireLogin: true,
                     message: nil,
                     spam: nil,
                     feedbackTitle: nil), rawData: data, statusCode: response.statusCode)))
