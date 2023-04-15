@@ -115,15 +115,16 @@ public struct HTTPJSONClient<Endpoint: HTTPEndpoint>: HTTPNetworkingClient {
                     completion(.failure(.errorObject(parsedError, rawData: data, statusCode: response.statusCode)))
                     return
                 }
-            } else if let urlString = response.url?.absoluteString,
-                      (urlString.contains("accounts/login") || (300...399).contains(response.statusCode)) {
-                completion(.failure(.errorObject(.init(
-                    status: "session_error",
-                    requireLogin: true,
-                    message: nil,
-                    spam: nil,
-                    feedbackTitle: nil), rawData: data, statusCode: response.statusCode)))
-                return
+            } else if let urlString = response.url?.absoluteString {
+                if urlString.contains("accounts/login") || (300...399).contains(response.statusCode) {
+                    completion(.failure(.errorObject(.init(
+                        status: "session_error",
+                        requireLogin: true,
+                        message: nil,
+                        spam: nil,
+                        feedbackTitle: nil), rawData: data, statusCode: response.statusCode)))
+                    return
+                }
             }
 
 			switch response.statusCode {
