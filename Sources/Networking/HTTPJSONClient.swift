@@ -116,7 +116,7 @@ public struct HTTPJSONClient<Endpoint: HTTPEndpoint>: HTTPNetworkingClient {
                     return
                 }
             } else if let urlString = response.url?.absoluteString,
-                      urlString == "https://www.instagram.com/" || (300...399).contains(response.statusCode) {
+                      (urlString.contains("account/login") || (300...399).contains(response.statusCode)) {
                 completion(.failure(.errorObject(.init(
                     status: "session_error",
                     requireLogin: true,
