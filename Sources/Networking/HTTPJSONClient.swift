@@ -125,7 +125,8 @@ public struct HTTPJSONClient<Endpoint: HTTPEndpoint>: HTTPNetworkingClient {
                     requireLogin: nil,
                     message: parsedString,
                     spam: nil,
-                    feedbackTitle: nil), rawData: data, statusCode: response.statusCode)))
+                    feedbackTitle: nil,
+                    code: response.statusCode), rawData: data, statusCode: response.statusCode)))
                 return
             }
 
@@ -136,7 +137,8 @@ public struct HTTPJSONClient<Endpoint: HTTPEndpoint>: HTTPNetworkingClient {
                         requireLogin: true,
                         message: nil,
                         spam: nil,
-                        feedbackTitle: nil), rawData: data, statusCode: response.statusCode)))
+                        feedbackTitle: nil,
+                        code: response.statusCode), rawData: data, statusCode: response.statusCode)))
                     return
                 }
             }
