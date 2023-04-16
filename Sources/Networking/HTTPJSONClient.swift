@@ -118,7 +118,7 @@ public struct HTTPJSONClient<Endpoint: HTTPEndpoint>: HTTPNetworkingClient {
             }
             
             if response.statusCode == 400,
-                let parsedString: String = try? self.decodeJSON(data: data),
+               let parsedString = String(data: data, encoding: .utf8),
                parsedString.contains("has been deleted") {
                 completion(.failure(.errorObject(.init(
                     status: "fail",
