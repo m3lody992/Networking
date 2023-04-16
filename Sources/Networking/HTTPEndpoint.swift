@@ -8,8 +8,8 @@
 
 import Foundation
 
-public typealias HTTPHeaders = [(String, Any)]
-public typealias HTTPParameters = [(String, Any)]
+public typealias HTTPHeaders = [String: Any]
+public typealias HTTPParameters = [String: Any]
 
 // A protocol describing an HTTP endpoint.
 public protocol HTTPEndpoint {
@@ -54,9 +54,9 @@ public extension HTTPEndpoint {
 
         if contentType == .json {
             request = try HTTPHeaderEncoder.encode(request: request, with: [
-                ("Accept", contentType.rawValue),
-                ("Content-Type", contentType.rawValue),
-                ("User-Agent", Networking.appName + String(Networking.version))
+                "Accept": contentType.rawValue,
+                "Content-Type": contentType.rawValue,
+                "User-Agent": Networking.appName + String(Networking.version)
             ])
         }
 
