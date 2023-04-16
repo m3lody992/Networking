@@ -29,7 +29,15 @@ public struct HTTPQueryStringEncoder: HTTPParameterEncoder {
 		var request = request
 
 		// Map the parameter dictionary to query items.
-		let queryItems = parameters.map { key, value -> URLQueryItem in
+        
+        let sorted = parameters.sorted { first, second in
+            if first.key == "count" {
+                return true
+            } else {
+                return false
+            }
+        }
+		let queryItems = sorted.map { key, value -> URLQueryItem in
 			return URLQueryItem(name: key, value: "\(value)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))
 		}
 
