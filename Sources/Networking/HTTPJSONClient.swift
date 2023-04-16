@@ -117,6 +117,18 @@ public struct HTTPJSONClient<Endpoint: HTTPEndpoint>: HTTPNetworkingClient {
                 }
             }
             
+            if response.statusCode == 400,
+                let parsedString: String = try? self.decodeJSON(data: data),
+               parsedString.contains("has been deleted") {
+                completion(.failure(.errorObject(.init(
+                    status: "fail",
+                    requireLogin: nil,
+                    message: parsedString,
+                    spam: nil,
+                    feedbackTitle: nil), rawData: data, statusCode: response.statusCode)))
+                return
+            }
+
             if let urlString = response.url?.absoluteString {
                 if urlString.contains("accounts/login") || (300...399).contains(response.statusCode) {
                     completion(.failure(.errorObject(.init(
